@@ -40,4 +40,4 @@
 
 #### Resources
 
-*   Immendes [handy compilation of GameBoy opcodes, their mnemonics, adresses and cycle length in JSON format](https://github.com/lmmendes/game-boy-opcodes)
+*   Immendes' [handy compilation of GameBoy opcodes, their mnemonics, adresses and cycle length in JSON format](https://github.com/lmmendes/game-boy-opcodes)
