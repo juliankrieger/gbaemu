@@ -6,13 +6,15 @@
 
 *   Implement all Z80 Architecture Calls in [cpu.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py) as specified by [GB ISA](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)  
 
+*   Integrate [Licensee Codes](https://github.com/juliankrieger/gbaemu/blob/master/temp/licensee_codes_unformatted) into [ram.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py)  
+
 *   Write a lot more unit and integration tests
 
 ### Distant Future
 
 *   Video Output  
 
-*   ound Handling  
+*   Sound Handling  
 
 *   Save States
 
