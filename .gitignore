@@ -1,2 +1,6 @@
 *.gb
 *.gba
+*.sav
+*.xml
+*.idea
+.idea/
