@@ -4,7 +4,7 @@
 
 *   Fully implement [GameBoy Cartridge Header](http://gbdev.gg8.se/wiki/articles/The_Cartridge_Header#0148_-_ROM_Size) handling in [ram.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py)  
 
-*   Implement all Z80 Architecture Calls in [cpu.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py) as specified by [GB ISA](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)  
+*   Implement all Z80 Architecture Calls in [cpu.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py) as specified by the ISA in [GameBoy CPU Manual](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)  
 
 *   Integrate [Licensee Codes](https://github.com/juliankrieger/gbaemu/blob/master/temp/licensee_codes_unformatted) into [ram.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py)  
 
