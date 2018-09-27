@@ -8,6 +8,10 @@
 
 *   Integrate [Licensee Codes](https://github.com/juliankrieger/gbaemu/blob/master/temp/licensee_codes_unformatted) into [ram.py](https://github.com/juliankrieger/gbaemu/blob/master/pyemu/ram.py)  
 
+*   Move Program Counter handling to cpu.py
+
+*   Move Commands to subclasses of a superclass that can handle setting program counter and memory adresses
+
 *   Write a lot more unit and integration tests
 
 ### Distant Future
