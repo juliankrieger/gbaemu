@@ -75,4 +75,3 @@ class RAMSize(Enum):
 class DestinationCode(Enum):
     JAPANESE = "00"
     NON_JAPANESE = "01"
-1
