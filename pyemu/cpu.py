@@ -4,6 +4,8 @@ from typing import Callable
 from pyemu.memory import Memory
 from pyemu.decoder import Decoder
 from pyemu.instruction import Instructions, Instruction
+from pyemu.ram import RAM
+
 
 import logging
 
@@ -12,14 +14,17 @@ class CPU:
     CPU class
     """
 
-    def __init__(self, adress_space: list):
+    def __init__(self, cartridge):
         """
         Initialise CPU
         :param adress_space: adress space is a X long bytestream, split into a 2 digit byte list
         """
+        adress_space = [cartridge[i:i + 2] for i in range(0, len(cartridge), 2)]
+        del cartridge
 
         self.memory = Memory()
-        self.adress_space = adress_space
+        self.ram = RAM(adress_space, self.memory)
+
         self.instructions = Instructions().instructions
         self.decoder = Decoder(self.instructions)
 
@@ -295,7 +300,7 @@ class CPU:
                 func: Callable
 
                 # Fetch command
-                byte = self.read_8_bit()
+                byte = self.ram.read_8_bit()
                 # Instruction decode
                 instr = self.decodeByte(byte)
 
@@ -331,42 +336,6 @@ class CPU:
         :return: Instruction class instance with specified values
         """
         return self.decoder.decode_instruction(byte)
-
-    def read_8_bit(self):
-        """
-        Fetch two digit hexadecimal number from actual program counter position
-        :return: two digit hexadecimal number, either opcode or Immediate via GB ISA
-        """
-        byte = self.adress_space[self.memory.pc]
-        return byte
-
-    def read_16_bit(self):
-        """
-        Fetch two, two digit hexadecimal numbers in a touple from adress_space
-        :return: touple of two digit hexadecimal numbers
-        """
-        byte1, byte2 = self.adress_space[self.memory.pc], self.adress_space[self.memory.pc + 1]
-        return byte1, byte2
-
-    def read_8_bit_at_adress(self, addr):
-        """
-        Fetch two digit hexadecimal number from actual program counter position
-        :return: two digit hexadecimal number, either opcode or Immediate via GB ISA
-        """
-        byte = self.adress_space[self.eval_adrr(addr)]
-        return byte
-
-    def read_16_bit_at_adress(self, addr):
-        """
-        Fetch two, two digit hexadecimal numbers in a touple from adress_space
-        :return: touple of two digit hexadecimal numbers
-        """
-        byte1, byte2 = self.adress_space[self.eval_adrr(addr)], self.adress_space[self.eval_adrr(addr) + 1]
-        return byte1, byte2
-
-    def store_8_bit_at_adress(self, addr, value):
-        self.adress_space[addr] = value
-
 
     # Execute
 
@@ -413,14 +382,14 @@ class CPU:
     #1
     def LD_BC_d16(self, instruct:Instruction):
         logging.log("PC: {} OP:  NAME: {}".format(self.memory.pc, instruct.addr, instruct.func))
-        self.memory.BC.b, self.memory.BC.c = self.read_16_bit()
+        self.memory.BC.b, self.memory.BC.c = self.ram.read_16_bit()
         self.memory.pc += instruct.length
 
     #2
     def LD_EVAL_BC_A(self, instruct:Instruction):
         logging.log("PC: {} OP:  NAME: {}".format(self.memory.pc, instruct.addr, instruct.func))
         self.memory.sp = self.memory.BC.b + self.memory.BC.C
-        self.store_8_bit_at_adress(self.memory.sp, self.memory.AF.a)
+        self.ram.store_8_bit_at_adress(self.memory.sp, self.memory.AF.a)
         self.memory.pc += instruct.length
 
 
